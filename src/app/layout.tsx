@@ -1,7 +1,7 @@
-// src/app/layout.tsx
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { AuthProvider } from '@/src/context/AuthContext';
 import { FavoritesProvider } from '@/src/context/FavoritesContext';
 import { CartProvider } from '@/src/context/CartContext';
 
@@ -20,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={inter.className}>
-        <FavoritesProvider>
-          <CartProvider>
-            {children}
-          </CartProvider>
-        </FavoritesProvider>
+        <AuthProvider>
+          <FavoritesProvider>
+            <CartProvider>
+              {children}
+            </CartProvider>
+          </FavoritesProvider>
+        </AuthProvider>
       </body>
     </html>
   );
